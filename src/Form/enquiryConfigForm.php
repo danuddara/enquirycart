@@ -69,14 +69,14 @@ class EnquiryConfigForm extends ConfigFormBase
           
           $form['basketfullmsg'] = array(
                 '#type' => 'text_format',
-                '#title' => t('Basket full message'),
+                '#title' => $this->t('Basket full message'),
                 '#default_value' => $config->get('instructions.basketfull'),
                 '#format' => 'full_html', 
                           );
           
            $form['basketemptymsg'] = array(
                 '#type' => 'text_format',
-                '#title' => t('Basket empty message'),
+                '#title' => $this->t('Basket empty message'),
                 '#default_value' => $config->get('instructions.basketempty'),
                 '#format' => 'full_html',
                         );

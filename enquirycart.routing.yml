@@ -20,4 +20,5 @@ enquirycart.settings:
     _form: '\Drupal\enquirycart\Form\EnquiryConfigForm'
     _title: 'Enquiry configuration'
   requirements:
-    _permission: 'administer site configuration'     
+    _permission: 'administer site configuration'
+    

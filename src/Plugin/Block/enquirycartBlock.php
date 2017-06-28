@@ -41,8 +41,6 @@ class EnquirycartBlock extends BlockBase implements BlockPluginInterface{
    */
   public function build() {
       
-    $config = $this->getConfiguration();
-  
     $builtForm = \Drupal::formBuilder()->getForm('Drupal\enquirycart\Form\EnquirycartButtonForm');
     $renderArray['form']  = $builtForm;
 
@@ -72,5 +70,5 @@ class EnquirycartBlock extends BlockBase implements BlockPluginInterface{
 
   
 }
-?>
+
 

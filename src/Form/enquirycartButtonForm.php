@@ -77,7 +77,7 @@ class EnquirycartButtonForm extends FormBase
      
             $this->managesession($request, $nodetitle);
 
-            $message = t("'@prodtitle' has been added to the @pagetitle",array('@prodtitle'=>$nodetitle,'@pagetitle'=>$this->config->get('title')));
+            $message = $this->t("'@prodtitle' has been added to the @pagetitle",array('@prodtitle'=>$nodetitle,'@pagetitle'=>$this->config->get('title')));
             drupal_set_message($message);
 
             $form_state->setRedirect('enquirycart.getEnquiryBasket');
@@ -85,7 +85,7 @@ class EnquirycartButtonForm extends FormBase
          }
          else
          {
-            $message = t('Sorry this cannot be added to the basket');
+            $message = $this->t('Sorry this cannot be added to the basket');
             drupal_set_message($message,'error');
          }
   

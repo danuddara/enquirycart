@@ -32,20 +32,20 @@ class EnquiryForm extends FormBase
       
        $form['name'] = array(
             '#type' => 'textfield',
-            '#title' => t('Name'),
+            '#title' => $this->t('Name'),
             '#required'=>true,
         );
       
       $form['email'] = array(
             '#type' => 'email',
-            '#title' => t('Email'),
+            '#title' => $this->t('Email'),
             '#required'=>true,
         );
             
          
         $form['text'] = array(
             '#type' => 'textarea',
-            '#title' => t('Message'),
+            '#title' => $this->t('Message'),
             '#required'=>true,
           );
         
@@ -113,19 +113,19 @@ class EnquiryForm extends FormBase
         $send = true;
         $result = $mailManager->mail($module, $key, $to, 'en', $params, $reply, $send);
         if ($result['result'] !== true) {
-          drupal_set_message(t('There was a problem sending your message and it was not sent.'), 'error');
+          drupal_set_message($this->t('There was a problem sending your message and it was not sent.'), 'error');
           
           
         }
         else {
-          drupal_set_message(t('Your message has been sent.'));
+          drupal_set_message($this->t('Your message has been sent.'));
           $session->clear('enquire');
         }
         
        }
        else
        {
-           drupal_set_message(t('Your enquiry basket is empty. cannot send any email'), 'error');
+           drupal_set_message($this->t('Your enquiry basket is empty. cannot send any email'), 'error');
        }
       
   }
