@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file
+ * enquiry form
  * 
  */
 
@@ -16,9 +16,10 @@ class EnquiryForm extends FormBase
   private $config; 
     
   public function __construct() {
+      
       $this->config = \Drupal::config('enquirycart.settings');
-      //dpm($this->config);
-  } 
+    
+      } 
     
    /**
    * {@inheritdoc}

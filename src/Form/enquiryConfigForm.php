@@ -91,7 +91,7 @@ class EnquiryConfigForm extends ConfigFormBase
     */
     public function submitForm(array &$form, FormStateInterface $form_state) {
         
-        //dpm($form_state->getValue('Basketfullmsg'));
+       
         $basketfullvalue = $form_state->getValue('basketfullmsg'); 
         $basketemptyvalue = $form_state->getValue('basketemptymsg'); 
       // Retrieve the configuration

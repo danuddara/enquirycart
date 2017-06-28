@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file
+ * 
  * Contains \Drupal\enquirycart\Controller\EnquirycartController.
  * have empty line in between everything,
  * have a space infornt of the comments.
@@ -23,7 +23,7 @@ class EnquirycartController extends ControllerBase{
 
   public function __construct() {
       $this->config = \Drupal::config('enquirycart.settings');
-      //dpm($this->config);
+     
   }
 
   public function getTitle()
@@ -43,12 +43,6 @@ class EnquirycartController extends ControllerBase{
       $arraychgeck = null;
       $value = $session->get('enquire');
      
-      
-           // var_dump($arraychgeck);
-      //dpm($arraychgeck);
-     
-      
-      
       if(!empty($value)){
           
       $values['addproducts'] = array(

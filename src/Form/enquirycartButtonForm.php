@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file
+ *
  * Contains \Drupal\enquirycart\Form\enquirycartButtonForm.
  */
 
