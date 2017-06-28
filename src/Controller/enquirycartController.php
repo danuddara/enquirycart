@@ -59,13 +59,13 @@ class EnquirycartController extends ControllerBase{
       foreach($arraychgeck as $key=>$value)
       {
            $options['attributes'] =  array('rel'=>'nofollow');
-          $value['operation']= Link::fromTextAndUrl( t('Delete'), Url::fromRoute('enquirycart.deleteEnquiryBasket',['eid' =>$arraykeys[$key]],$options) );
+          $value['operation']= Link::fromTextAndUrl( $this->t('Delete'), Url::fromRoute('enquirycart.deleteEnquiryBasket',['eid' =>$arraykeys[$key]],$options) );
          $arraychgeck[$key]=$value;
       }
       
         $values['basket'] = array(
           '#type' => 'table',
-          '#header' => array(t('Product Names')),
+          '#header' => array($this->t('Product Names')),
           '#default'=>'No products have been added to the basket',
           '#rows' => (!empty($arraychgeck))? $arraychgeck: array('No products have been added to the basket') ,
          );
@@ -111,7 +111,7 @@ class EnquirycartController extends ControllerBase{
       if(isset($value[$eid]))
       {
      
-       $message = t("'@prod' has been removed from the enquiry basket.",array("@prod"=>$value[$eid]));
+       $message = $this->t("'@prod' has been removed from the enquiry basket.",array("@prod"=>$value[$eid]));
        unset($value[$eid]);
        $session->set('enquire', $value);
        drupal_set_message($message);
