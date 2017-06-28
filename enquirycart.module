@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * Implements hook_install().
+ * 
+ * This is created for clearing out the session when installed again.
+ */
+function enquirycart_install()
+{
+    $request = \Drupal::request();
+    $session = $request->getSession();
+    $session->remove('enquire');
+    
+}
