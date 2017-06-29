@@ -10,6 +10,16 @@ use Drupal\Core\Form\FormStateInterface;
  */
 class EnquiryConfigForm extends ConfigFormBase {
 
+  private $config;
+
+  /**
+   * Constructor to set the config.
+   */
+  public function __construct() {
+    $this->config = $this->config('enquirycart.settings');
+
+  }
+
   /**
    * {@inheritdoc}
    */
@@ -31,18 +41,16 @@ class EnquiryConfigForm extends ConfigFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
-    $config = $this->config('enquirycart.settings');
-
-    $site_email = $config->get('enquirycart.email');
+    $site_email = $this->config->get('enquirycart.email');
     if (empty($site_email)) {
-      $system_site_config = \Drupal::config('system.site');
+      $system_site_config = $this->config('system.site');
       $site_email = $system_site_config->get('mail');
     }
 
     $form['title'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Title of the page'),
-      '#default_value' => $config->get('title'),
+      '#default_value' => $this->config->get('title'),
       '#description' => $this->t('Type in the page title that you want to display in the enquiry basket'),
     ];
 
@@ -56,28 +64,28 @@ class EnquiryConfigForm extends ConfigFormBase {
     $form['addtoenquirybtntitle'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Title of button "add to enquiry"'),
-      '#default_value' => $config->get('buttonTitle'),
+      '#default_value' => $this->config->get('buttonTitle'),
       '#description' => $this->t('Type in a title that you want to display in the button'),
     ];
 
     $form['sendbuttonTitle'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Title of button "Send Enquiry"'),
-      '#default_value' => $config->get('sendbuttonTitle'),
+      '#default_value' => $this->config->get('sendbuttonTitle'),
       '#description' => $this->t('Type in a title that you want to display in the button to send the enquiry'),
     ];
 
     $form['basketfullmsg'] = [
       '#type' => 'text_format',
       '#title' => $this->t('Basket full message'),
-      '#default_value' => $config->get('instructions.basketfull'),
+      '#default_value' => $this->config->get('instructions.basketfull'),
       '#format' => 'full_html',
     ];
 
     $form['basketemptymsg'] = [
       '#type' => 'text_format',
       '#title' => $this->t('Basket empty message'),
-      '#default_value' => $config->get('instructions.basketempty'),
+      '#default_value' => $this->config->get('instructions.basketempty'),
       '#format' => 'full_html',
     ];
 
@@ -92,7 +100,7 @@ class EnquiryConfigForm extends ConfigFormBase {
     $basketfullvalue = $form_state->getValue('basketfullmsg');
     $basketemptyvalue = $form_state->getValue('basketemptymsg');
     // Retrieve the configuration.
-    $this->config('enquirycart.settings')
+    $this->config
         // Set the submitted configuration setting.
       ->set('title', $form_state->getValue('title'))
         // You can set multiple configurations at once by making

@@ -17,7 +17,7 @@ class EnquirycartButtonForm extends FormBase {
    * Constructor for enquirycart config.
    */
   public function __construct() {
-    $this->config = \Drupal::config('enquirycart.settings');
+    $this->config = $this->config('enquirycart.settings');
 
   }
 

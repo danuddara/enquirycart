@@ -16,7 +16,7 @@ class EnquiryForm extends FormBase {
    */
   public function __construct() {
 
-    $this->config = \Drupal::config('enquirycart.settings');
+    $this->config = $this->config('enquirycart.settings');
 
   }
 
@@ -77,10 +77,9 @@ class EnquiryForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
-    $config = \Drupal::config('enquirycart.settings');
-    $to = $config->get('enquirycart.email');
+    $to = $this->config->get('enquirycart.email');
     if (empty($to)) {
-      $system_site_config = \Drupal::config('system.site');
+      $system_site_config = $this->config('system.site');
       $to = $system_site_config->get('mail');
     }
 

@@ -17,7 +17,7 @@ class EnquirycartController extends ControllerBase {
    * Constructor to set the config.
    */
   public function __construct() {
-    $this->config = \Drupal::config('enquirycart.settings');
+    $this->config = $this->config('enquirycart.settings');
 
   }
 
