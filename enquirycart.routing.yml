@@ -21,4 +21,3 @@ enquirycart.settings:
     _title: 'Enquiry configuration'
   requirements:
     _permission: 'administer site configuration'
-    
