@@ -24,7 +24,7 @@ class EnquirycartBlock extends BlockBase implements BlockPluginInterface {
   public function defaultConfiguration() {
     return [
       'label_display' => FALSE,
-      ];
+    ];
 
   }
 
