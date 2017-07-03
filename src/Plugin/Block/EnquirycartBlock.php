@@ -22,12 +22,9 @@ class EnquirycartBlock extends BlockBase implements BlockPluginInterface {
    * {@inheritdoc}
    */
   public function defaultConfiguration() {
-    $default_config = \Drupal::config('enquirycart.settings');
-
     return [
       'label_display' => FALSE,
-      'enquiry_email' => $default_config->get('enquirycart.email'),
-    ];
+      ];
 
   }
 
