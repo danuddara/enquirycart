@@ -67,7 +67,7 @@ class EnquirycartController extends ControllerBase {
         '#rows' => (!empty($arraychgeck)) ? $arraychgeck : ['No products have been added to the basket'] ,
       ];
 
-      $builtForm = \Drupal::formBuilder()->getForm('Drupal\enquirycart\Form\EnquiryForm');
+      $builtForm = $this->formBuilder()->getForm('Drupal\enquirycart\Form\EnquiryForm');
       $values['form'] = $builtForm;
 
     }

@@ -33,7 +33,7 @@ class EnquirycartButtonForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
-    $node = \Drupal::routeMatch()->getParameter('node');
+    $node = $this->getRouteMatch()->getParameter('node');
 
     // Check if the current page is a node and display the button.
     // we don't want to give errors for the ones that cannot be accessed.
@@ -60,8 +60,8 @@ class EnquirycartButtonForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
-    $node = \Drupal::routeMatch()->getParameter('node');
-    $request = \Drupal::request();
+    $node = $this->getRouteMatch()->getParameter('node');
+    $request = $this->getRequest();
 
     if ($node != NULL) {
       $nodetitle = $node->getTitle();

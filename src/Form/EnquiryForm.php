@@ -83,7 +83,7 @@ class EnquiryForm extends FormBase {
       $to = $system_site_config->get('mail');
     }
 
-    $request = \Drupal::request();
+    $request = $this->getRequest();
 
     $session = $request->getSession();
     $value = $session->get('enquire');
