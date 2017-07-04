@@ -5,6 +5,8 @@ namespace Drupal\enquirycart\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Enquiry contoller class.
@@ -13,12 +15,23 @@ class EnquirycartController extends ControllerBase {
 
   private $config;
 
+  private $request;
+
   /**
    * Constructor to set the config.
    */
-  public function __construct() {
+  public function __construct(RequestStack $request_stack) {
     $this->config = $this->config('enquirycart.settings');
+    $this->request = $request_stack->getCurrentRequest();
+  }
 
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+            $container->get('request_stack')
+            );
   }
 
   /**
@@ -35,9 +48,8 @@ class EnquirycartController extends ControllerBase {
    * Get enquiry basket.
    */
   public  function getEnquiryBasket() {
-    $request = \Drupal::request();
 
-    $session = $request->getSession();
+    $session = $this->request->getSession();
 
     $arraychgeck = NULL;
     $value = $session->get('enquire');
@@ -93,8 +105,8 @@ class EnquirycartController extends ControllerBase {
    *   URL value passsed from enquirybasket/{eid}/delete.
    */
   public function deleteFromEnquiryBasket($eid) {
-    $request = \Drupal::request();
-    $session = $request->getSession();
+
+    $session = $this->request->getSession();
 
     $value = $session->get('enquire');
 

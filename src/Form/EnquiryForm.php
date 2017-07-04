@@ -4,6 +4,8 @@ namespace Drupal\enquirycart\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Mail\MailManagerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Enquiry form for enquires.
@@ -11,13 +13,24 @@ use Drupal\Core\Form\FormStateInterface;
 class EnquiryForm extends FormBase {
   private $config;
 
+  private $mailManager;
+
   /**
    * Config object setup for enquiry cart settings.
    */
-  public function __construct() {
+  public function __construct(MailManagerInterface $mail_manager) {
 
     $this->config = $this->config('enquirycart.settings');
+    $this->mailManager = $mail_manager;
+  }
 
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+             $container->get('plugin.manager.mail')
+            );
   }
 
   /**
@@ -93,7 +106,7 @@ class EnquiryForm extends FormBase {
       $enquiryTitleList = implode(', ', $value);
 
       $message = $form_state->getValue('text');
-      $mailManager = \Drupal::service('plugin.manager.mail');
+
       $module = "enquirycart";
       $name = $form_state->getValue('name');
       $key = 'Send_enquiry';
@@ -101,14 +114,14 @@ class EnquiryForm extends FormBase {
       $params['subject'] = "Enquiry for Milk Meters from {$name}";
 
       $body = "Name: {$name}\n 
-           Email: {$reply}
-           List items: \n{$enquiryTitleList}n
+           Email: {$reply}\n
+           List items: \n{$enquiryTitleList}\n
            Message:\n {$message}\n";
 
       $params['message'] = $body;
 
       $send = TRUE;
-      $result = $mailManager->mail($module, $key, $to, 'en', $params, $reply, $send);
+      $result = $this->mailManager->mail($module, $key, $to, 'en', $params, $reply, $send);
       if ($result['result'] !== TRUE) {
         drupal_set_message($this->t('There was a problem sending your message and it was not sent.'), 'error');
 
