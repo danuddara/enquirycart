@@ -111,12 +111,9 @@ class EnquiryForm extends FormBase {
       $name = $form_state->getValue('name');
       $key = 'Send_enquiry';
       $reply = $form_state->getValue('email');
-      $params['subject'] = "Enquiry for Milk Meters from {$name}";
+      $params['subject'] = "Enquiry from {$name}";
 
-      $body = "Name: {$name}\n 
-           Email: {$reply}\n
-           List items: \n{$enquiryTitleList}\n
-           Message:\n {$message}\n";
+      $body = "Name: {$name}\nEmail: {$reply}\nList items:\n {$enquiryTitleList}\nMessage:\n {$message}\n";
 
       $params['message'] = $body;
 
@@ -124,7 +121,6 @@ class EnquiryForm extends FormBase {
       $result = $this->mailManager->mail($module, $key, $to, 'en', $params, $reply, $send);
       if ($result['result'] !== TRUE) {
         drupal_set_message($this->t('There was a problem sending your message and it was not sent.'), 'error');
-
       }
       else {
         drupal_set_message($this->t('Your message has been sent.'));
