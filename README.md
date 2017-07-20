@@ -1,6 +1,6 @@
 Introduction
 
-This is a drupal 8 module
+This is a drupal 8 module.
 check the dev branch for the code.
 
 EnquiryCart module will be able to add an enquiry 
